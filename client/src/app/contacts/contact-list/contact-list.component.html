@@ -1,0 +1,36 @@
+<div class="example-header">
+  <mat-form-field>
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="search">
+  </mat-form-field>
+</div>
+
+<div class="example-container mat-elevation-z8">
+
+  <mat-table [dataSource]="dataSource" matSort>
+
+    <!-- ID Column -->
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row._id}} </mat-cell>
+    </ng-container>
+
+
+    <!-- Full Name Column -->
+    <ng-container matColumnDef="full_name">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Full Name </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.last_name +', ' + row.first_name}} </mat-cell>
+    </ng-container>
+
+    <!-- Phone Number Column -->
+    <ng-container matColumnDef="phone_number">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Phone Number </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.phone_number}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;">
+    </mat-row>
+  </mat-table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+</div>
